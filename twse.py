@@ -12,11 +12,11 @@ import requests
 import time
 import dataframe_image as dfi
 import os
-
+import math 
 
 def get_twse_trade():
+    
     today = time.gmtime()
-
     year = str(today.tm_year)
     month = str(today.tm_mon)
     date = str(today.tm_mday)
@@ -43,9 +43,15 @@ def get_twse_trade():
         json_data = json.loads(data)
         Stock_data = json_data['data']
         StockPrice = pd.DataFrame(Stock_data, columns = ['單位名稱', '買進金額', '賣出金額', '買賣差額'])
+        # StockPrice['買進金額'] = StockPrice['買進金額'].str.replace(',','').astype(float)
+        # StockPrice['賣出金額'] = StockPrice['賣出金額'].str.replace(',','').astype(float)
+        # StockPrice['買賣差額'] = StockPrice['買賣差額'].str.replace(',','').astype(float)
+        
+        # result = StockPrice.to_numpy()
+        # result[:,1] = math.floor(result[:,1]/100000000)
 
         if not os.path.exists(todaydate+'.png'):
-            dfi.export(StockPrice, todaydate+'.png')
+            dfi.export(StockPrice, './resources/'+todaydate+'.png')
         
         return (200,todaydate)
 
