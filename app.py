@@ -19,7 +19,6 @@ token = f.readlines()
 token = token[0][:-1]
 notify = LineNotify(token)
 
-@app.route("/")
 class Config(object):
     JOBS = [
         {
@@ -28,8 +27,8 @@ class Config(object):
             # 'args': (1, 2),              # 傳入函式的引數
             'trigger': 'cron',                            # 指定任務觸發器 cron
             'day_of_week': 'mon-fri',              # 每週1至周5早上6點執行 
-            'hour': 15,
-            'minute': 45   
+            'hour': 16,
+            'minute': 00   
         }
     ]
 
