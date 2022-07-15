@@ -33,6 +33,13 @@ step 12. >>python manage.py createsuperuser
 ##pip freeze =>requirements.txt (commit前，確認要裝的模組有沒有含在裡面)
 
 參考資料:
+
+
 https://www.youtube.com/watch?v=MoX36izzEWY&t=1590s&ab_channel=buildwithpython
 
+
 https://www.796t.com/article.php?id=55206
+
+
+https://devcenter.heroku.com/articles/clock-processes-python
+
