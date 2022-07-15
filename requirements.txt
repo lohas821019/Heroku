@@ -6,5 +6,4 @@ gunicorn
 Flask
 dataframe_image
 requests
-json
 time
