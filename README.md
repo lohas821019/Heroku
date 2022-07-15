@@ -30,3 +30,5 @@ step 12. >>python manage.py createsuperuser
 
 參考資料:
 https://www.youtube.com/watch?v=MoX36izzEWY&t=1590s&ab_channel=buildwithpython
+
+https://www.796t.com/article.php?id=55206

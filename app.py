@@ -30,7 +30,7 @@ class Config(object):
             'trigger': 'cron',                            # 指定任務觸發器 cron
             'day_of_week': 'mon-fri',              # 每週1至周5早上6點執行 
             'hour': 15,
-            'minute': 59   
+            'minute': 00   
         }
     ]
 
