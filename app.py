@@ -20,7 +20,6 @@ token = token[0][:-1]
 notify = LineNotify(token)
 
 @app.route("/")
-
 class Config(object):
     JOBS = [
         {
