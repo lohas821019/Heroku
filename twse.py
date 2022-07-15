@@ -47,7 +47,7 @@ def get_twse_trade():
         StockPrice['買賣差額'] = round(StockPrice['買賣差額'].str.replace(',','').astype(float)/100000000,2)
         
         # result = StockPrice.to_numpy()
-        if not os.path.exists(todaydate+'.png'):
+        if not os.path.exists(todaydate+'.jpg'):
             dfi.export(StockPrice, './resources/'+todaydate+'.jpg')
         
         return (200,todaydate)
