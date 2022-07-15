@@ -6,3 +6,4 @@ gunicorn
 Flask
 dataframe_image
 requests 
+dataframe-image-heroku-0.1.2
