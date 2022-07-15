@@ -45,7 +45,7 @@ def trade_transaction():
         # notify.send(result[2][2])
         # notify.send(result[2][3])
         # notify.send(result[2][4])
-
+        #test
     return result[0]
 
 
