@@ -10,6 +10,7 @@ from twse import *
 from line_notify import LineNotify
 from flask_apscheduler import APScheduler
 
+
 app = Flask(__name__)  # 实例化，可视为固定格式
 app.debug = True  # Flask内置了调试模式，可以自动重载代码并显示调试信息
 app.config['JSON_AS_ASCII'] = False  # 解决flask接口中文数据编码问题

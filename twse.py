@@ -13,6 +13,7 @@ import time
 import dataframe_image as dfi
 import os
 
+
 def get_twse_trade():
     today = time.gmtime()
 
