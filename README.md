@@ -1,5 +1,6 @@
 # Heroku
 
+
 如何把Django post上去heroku
 
 step 1.修改Django程式，並且要在local端可執行
@@ -15,6 +16,9 @@ step 5. >> git add --all (git add .)
 step 6. >> git commit-m  "First"
 
 step 7. >> git push Heroku master
+```
+git push heroku HEAD:master
+```
 
 step 8. >> Heroku git: remote app(Heroku上面創的名稱)
 
