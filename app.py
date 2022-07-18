@@ -14,8 +14,6 @@ app = Flask(__name__)  # 实例化，可视为固定格式
 app.debug = True  # Flask内置了调试模式，可以自动重载代码并显示调试信息
 app.config['JSON_AS_ASCII'] = False  # 解决flask接口中文数据编码问题
 
-# app.config['SQLALCHEMY_DATABASE_URI'] ='postgres://aueoelpssovgjy:19a06be94e49947a209427f6926aca3e006e45d0695aa5617b0c4bbcce1a3321@ec2-3-228-235-79.compute-1.amazonaws.com:5432/dabpsjc878kplf'
-
 f = open('token.txt', 'r')
 token = f.readlines()
 token = token[0][:-1]
