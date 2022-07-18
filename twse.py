@@ -88,5 +88,3 @@ def render_mpl_table(data, col_width=3.0, row_height=0.625, font_size=14,
         else:
             cell.set_facecolor(row_colors[k[0]%len(row_colors) ])
     return ax.get_figure(), ax
-
-get_twse_trade()
