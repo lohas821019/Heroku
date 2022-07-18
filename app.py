@@ -10,10 +10,11 @@ from twse import *
 from line_notify import LineNotify
 from flask_apscheduler import APScheduler
 
-
 app = Flask(__name__)  # 实例化，可视为固定格式
 app.debug = True  # Flask内置了调试模式，可以自动重载代码并显示调试信息
 app.config['JSON_AS_ASCII'] = False  # 解决flask接口中文数据编码问题
+
+# app.config['SQLALCHEMY_DATABASE_URI'] ='postgres://aueoelpssovgjy:19a06be94e49947a209427f6926aca3e006e45d0695aa5617b0c4bbcce1a3321@ec2-3-228-235-79.compute-1.amazonaws.com:5432/dabpsjc878kplf'
 
 f = open('token.txt', 'r')
 token = f.readlines()
@@ -26,16 +27,16 @@ class Config(object):
             'id': 'trade_transaction', # 一個標識
             'func': '__main__:trade_transaction',     # 指定執行的函式 
             # 'args': (1, 2),              # 傳入函式的引數
-            'trigger': 'cron',                            # 指定任務觸發器 cron
-            'day_of_week': 'mon-fri',              # 每週1至周5早上6點執行 
-            'hour': 15,
-            'minute': 00   
-            # 'trigger': 'interval',
-            # 'seconds': 10
+            # 'trigger': 'cron',                            # 指定任務觸發器 cron
+            # 'day_of_week': 'mon-fri',              # 每週1至周5早上6點執行 
+            # 'hour': 15,
+            # 'minute': 00   
+            'trigger': 'interval',
+            'seconds': 60
         }
     ]
-
     SCHEDULER_API_ENABLED = True
+    
 def trade_transaction():
     result = get_twse_trade()
     if result[0] == 200:
@@ -63,5 +64,6 @@ if __name__ == '__main__':
     # scheduler.api_enabled = True
     scheduler.init_app(app)                    # 把任務列表放入 flask
     scheduler.start()                          # 啟動任務列表
+    app.debug = True
     app.run()                                  # 啟動 flask
     

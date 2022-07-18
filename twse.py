@@ -12,6 +12,11 @@ import requests
 import time
 import dataframe_image as dfi
 import os
+import matplotlib as plt
+
+#pandas 結果對齊
+pd.set_option('display.unicode.ambiguous_as_wide', True)
+pd.set_option('display.unicode.east_asian_width', True)
 
 def get_twse_trade():
     
@@ -27,7 +32,7 @@ def get_twse_trade():
         date = zero + date
 
     todaydate = year+month+date
-
+    
     headers = {
     'user-agent':"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36",
     "Accept-Language": "zh-TW,zh;q=0.9,en-US;q=0.8,en;q=0.7"
@@ -47,10 +52,12 @@ def get_twse_trade():
         StockPrice['買賣差額'] = round(StockPrice['買賣差額'].str.replace(',','').astype(float)/100000000,2)
         
         result = StockPrice.to_numpy()
-        # if not os.path.exists(todaydate+'.jpg'):
-        #     dfi.export(StockPrice, './resources/'+todaydate+'.jpg')
         
+        if not os.path.exists(todaydate+'.jpg'):
+            dfi.export(StockPrice, './resources/'+todaydate+'.jpg')
         return (200,todaydate,result)
+    
+
 
 
 
