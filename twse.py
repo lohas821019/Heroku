@@ -53,8 +53,8 @@ def get_twse_trade():
         
         result = StockPrice.to_numpy()
         
-        if not os.path.exists(todaydate+'.jpg'):
-            dfi.export(StockPrice, './resources/'+todaydate+'.jpg')
+        # if not os.path.exists(todaydate+'.jpg'):
+        #     dfi.export(StockPrice, './resources/'+todaydate+'.jpg')
         return (200,todaydate,result)
     
 

@@ -25,27 +25,27 @@ class Config(object):
             'id': 'trade_transaction', # 一個標識
             'func': '__main__:trade_transaction',     # 指定執行的函式 
             # 'args': (1, 2),              # 傳入函式的引數
-            # 'trigger': 'cron',                            # 指定任務觸發器 cron
-            # 'day_of_week': 'mon-fri',              # 每週1至周5早上6點執行 
-            # 'hour': 15,
-            # 'minute': 00   
-            'trigger': 'interval',
-            'seconds': 10
+            'trigger': 'cron',                            # 指定任務觸發器 cron
+            'day_of_week': 'mon-fri',              # 每週1至周5早上6點執行 
+            'hour': 15,
+            'minute': 00   
+            # 'trigger': 'interval',
+            # 'seconds': 20
         }
     ]
     SCHEDULER_API_ENABLED = True
     
 def trade_transaction():
-    notify.send('測試',image_path='./resources/dog.jpg')
+    # notify.send('測試',image_path='./resources/dog.jpg')
     result = get_twse_trade()
     if result[0] == 200:
-        notify.send(result[1] + " 三大法人買賣金額統計表", image_path='./resources/'+result[1]+'.jpg')
-        # notify.send(result[1] + "  三大法人買賣金額統計表")
-        # notify.send(result[2][0])
-        # notify.send(result[2][1])
-        # notify.send(result[2][2])
-        # notify.send(result[2][3])
-        # notify.send(result[2][4])
+        # notify.send(result[1] + " 三大法人買賣金額統計表", image_path='./resources/'+result[1]+'.jpg')
+        notify.send(result[1] + "  三大法人買賣金額統計表")
+        notify.send(result[2][0])
+        notify.send(result[2][1])
+        notify.send(result[2][2])
+        notify.send(result[2][3])
+        notify.send(result[2][4])
 
     return result[0]
 
