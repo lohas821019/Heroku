@@ -17,6 +17,9 @@ import matplotlib.pyplot as plt
 # plt.rcParams['font.sans-serif'] = ['Microsoft JhengHei'] 
 # plt.rcParams['axes.unicode_minus'] = False
 
+plt.rcParams['font.sans-serif'] = ['Microsoft JhengHei'] 
+plt.rcParams['axes.unicode_minus'] = False
+
 #pandas 結果對齊
 pd.set_option('display.unicode.ambiguous_as_wide', True)
 pd.set_option('display.unicode.east_asian_width', True)
