@@ -6,3 +6,4 @@ gunicorn
 Flask
 dataframe_image
 requests 
+matplotlib
