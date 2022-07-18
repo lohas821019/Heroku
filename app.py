@@ -36,7 +36,7 @@ class Config(object):
     SCHEDULER_API_ENABLED = True
     
 def trade_transaction():
-    notify.send('測試',image_path='./resources/dog.png')
+    notify.send('測試',image_path='./resources/dog.jpg')
     result = get_twse_trade()
     if result[0] == 200:
         notify.send(result[1] + " 三大法人買賣金額統計表", image_path='./resources/'+result[1]+'.jpg')
