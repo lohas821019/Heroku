@@ -14,8 +14,8 @@ import time
 import os
 import matplotlib.pyplot as plt
 
-plt.rcParams['font.sans-serif'] = ['Microsoft JhengHei'] 
-plt.rcParams['axes.unicode_minus'] = False
+# plt.rcParams['font.sans-serif'] = ['Microsoft JhengHei'] 
+# plt.rcParams['axes.unicode_minus'] = False
 
 #pandas 結果對齊
 pd.set_option('display.unicode.ambiguous_as_wide', True)
@@ -83,3 +83,4 @@ def render_mpl_table(data, col_width=3.0, row_height=0.625, font_size=14,
             cell.set_facecolor(row_colors[k[0]%len(row_colors) ])
     return ax.get_figure(), ax
 
+get_twse_trade()
