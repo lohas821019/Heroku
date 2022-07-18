@@ -30,7 +30,7 @@ class Config(object):
             # 'hour': 15,
             # 'minute': 00   
             'trigger': 'interval',
-            'seconds': 60
+            'seconds': 10
         }
     ]
     SCHEDULER_API_ENABLED = True
