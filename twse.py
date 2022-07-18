@@ -17,7 +17,10 @@ import matplotlib.pyplot as plt
 # plt.rcParams['font.sans-serif'] = ['Microsoft JhengHei'] 
 # plt.rcParams['axes.unicode_minus'] = False
 
-plt.rcParams['font.sans-serif'] = ['Microsoft JhengHei'] 
+# plt.rcParams['font.sans-serif'] = ['Microsoft JhengHei'] 
+# plt.rcParams['axes.unicode_minus'] = False
+
+plt.rcParams['font.sans-serif'] = ['SimHei'] 
 plt.rcParams['axes.unicode_minus'] = False
 
 #pandas 結果對齊
