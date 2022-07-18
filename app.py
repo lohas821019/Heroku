@@ -37,7 +37,6 @@ class Config(object):
     
 def trade_transaction():
     result = get_twse_trade()
-    print(result)
     if result[0] == 200:
         notify.send(result[1] + "三大法人買賣金額統計表", image_path='./resources/'+result[1]+'.png')
         # notify.send(result[1] + "  三大法人買賣金額統計表")
