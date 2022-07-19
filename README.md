@@ -72,8 +72,9 @@ https://github.com/heroku/heroku-buildpack-chromedriver
 
 https://github.com/heroku/heroku-buildpack-google-chrome
 
+<br>
 
-![buildpacks](./resources/Buildpacks.png)
+![buildpacks](./resources/Buildpacks.jpg)
 
 
 1. 確認程式在虛擬環境可以使用，並且要在local端可執行
