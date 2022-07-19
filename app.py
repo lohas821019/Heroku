@@ -30,7 +30,8 @@ class Config(object):
             'hour': 15,
             'minute': 00   
             # 'trigger': 'interval',
-            # 'seconds': 20
+            # 'seconds': 60
+
         }
     ]
     SCHEDULER_API_ENABLED = True
@@ -39,14 +40,14 @@ def trade_transaction():
     # notify.send('測試',image_path='./resources/dog.jpg')
     result = get_twse_trade()
     if result[0] == 200:
-        # notify.send(result[1] + " 三大法人買賣金額統計表", image_path='./resources/'+result[1]+'.jpg')
-        notify.send(result[1] + "  三大法人買賣金額統計表")
-        notify.send(result[2][0])
-        notify.send(result[2][1])
-        notify.send(result[2][2])
-        notify.send(result[2][3])
-        notify.send(result[2][4])
-
+        notify.send(result[1] + "三大法人買賣金額統計表", image_path='./resources/'+result[1]+'.png')
+        # notify.send(result[1] + "  三大法人買賣金額統計表")
+        # notify.send(result[2][0])
+        # notify.send(result[2][1])
+        # notify.send(result[2][2])
+        # notify.send(result[2][3])
+        # notify.send(result[2][4])
+        
     return result[0]
 
 

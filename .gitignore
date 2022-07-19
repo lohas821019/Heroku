@@ -1,4 +1,5 @@
 *.pyc
 .venv/
+.heroku_env/
 .vscode/
 *.png
