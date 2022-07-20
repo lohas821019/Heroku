@@ -14,6 +14,7 @@ import time
 import os
 import matplotlib.pyplot as plt
 
+
 plt.rcParams['font.sans-serif'] = ['SimHei'] 
 plt.rcParams['axes.unicode_minus'] = False
 
@@ -82,3 +83,22 @@ def render_mpl_table(data, col_width=3.0, row_height=0.625, font_size=14,
         else:
             cell.set_facecolor(row_colors[k[0]%len(row_colors) ])
     return ax.get_figure(), ax
+
+#%%
+
+# from bs4 import BeautifulSoup
+# from lxml import etree
+
+# def get_histock_option():
+    
+#     url = 'https://histock.tw/stock/three.aspx'
+#     data = requests.get(url).text
+    
+#     soup = BeautifulSoup(data, "html.parser")
+#     # print(soup.prettify())  #輸出排版後的HTML內容
+    
+#     dom = etree.HTML(str(soup))
+    
+
+
+
