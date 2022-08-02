@@ -32,7 +32,8 @@ def get_twse_trade():
     zero = '0'
     if len(month) == 1:
         month = zero + month
-    elif len(date) == 1:
+        
+    if len(date) == 1:
         date = zero + date
 
     todaydate = year+month+date
