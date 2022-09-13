@@ -110,6 +110,8 @@ git push heroku HEAD:master
 
 [修正圖片顯示字體問題](https://elements.heroku.com/buildpacks/debitoor/heroku-buildpack-converter-fonts)
 
+[修正會傳兩次訊息問題](https://stackoverflow.com/questions/14874782/apscheduler-in-flask-executes-twice)
+
 <br>
 
 # dataframe_image(報錯原因)
