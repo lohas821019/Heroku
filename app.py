@@ -28,8 +28,9 @@ def index():
     if request.method == 'POST':
         if request.form.get('action1') == 'VALUE1':
             trade_transaction()
+            return "Flask Test1!"
         elif  request.form.get('action2') == 'VALUE2':
-            pass # do something else
+            return "Flask Test2!"
         else:
             pass # unknown
     elif request.method == 'GET':
