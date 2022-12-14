@@ -30,7 +30,8 @@ class Config(object):
             'hour': 15,
             'minute': 00   
             # 'trigger': 'interval',
-            # 'seconds': 60
+            # 'seconds': 10
+
         }
     ]
     SCHEDULER_API_ENABLED = True
@@ -39,12 +40,6 @@ def trade_transaction():
     result = get_twse_trade()
     if result[0] == 200:
         notify.send(result[1] + "三大法人買賣金額統計表", image_path='./resources/'+result[1]+'.png')
-        # notify.send(result[1] + "  三大法人買賣金額統計表")
-        # notify.send(result[2][0])
-        # notify.send(result[2][1])
-        # notify.send(result[2][2])
-        # notify.send(result[2][3])
-        # notify.send(result[2][4])
     return result[0]
 
 
@@ -63,5 +58,5 @@ if __name__ == '__main__':
     scheduler.init_app(app)                    # 把任務列表放入 flask
     scheduler.start()                          # 啟動任務列表
     app.debug = True
-    app.run()                                  # 啟動 flask
+    app.run(use_reloader=False)                # 啟動 flask
     
