@@ -5,7 +5,7 @@ Created on Thu Jul 14 13:55:19 2022
 @author: Jason
 """
 
-from flask import Flask
+from flask import Flask, redirect, url_for, request, render_template
 from twse import *
 from line_notify import LineNotify
 from flask_apscheduler import APScheduler
@@ -18,6 +18,25 @@ f = open('token.txt', 'r')
 token = f.readlines()
 token = token[0][:-1]
 notify = LineNotify(token)
+
+# @app.route("/")
+# def hello():
+#     return "Flask Test!"
+
+@app.route("/", methods=['GET', 'POST'])
+def index():
+    if request.method == 'POST':
+        if request.form.get('action1') == 'VALUE1':
+            trade_transaction()
+        elif  request.form.get('action2') == 'VALUE2':
+            pass # do something else
+        else:
+            pass # unknown
+    elif request.method == 'GET':
+        return render_template('index.html', form=request.form)
+    
+    return render_template("index.html")
+
 
 class Config(object):
     JOBS = [
@@ -49,7 +68,7 @@ def trade_transaction():
 # notify.send("圖片&貼紙測試", image_path='./'+result[1]+'.png',sticker_id=283,package_id=4)
 
 if __name__ == '__main__':
-    app = Flask(__name__)                 # 例項化flask
+    app = Flask(__name__,template_folder='templates')                 # 例項化flask
     app.config.from_object(Config())      # 為例項化的 flask 引入配置 
 
     scheduler = APScheduler()                  # 例項化 APScheduler
