@@ -59,11 +59,11 @@ def get_twse_trade():
         
         result = StockPrice.to_numpy()
         
-        # fig,ax = render_mpl_table(StockPrice, header_columns=0, col_width=2.0)
-        # fig.savefig('./resources/'+todaydate +".png")
+        fig,ax = render_mpl_table(StockPrice, header_columns=0, col_width=2.0)
+        fig.savefig('./resources/'+todaydate +".png")
         
-        if not os.path.exists(todaydate+'.jpg'):
-            dfi.export(StockPrice, './resources/'+todaydate+'.jpg')
+        # if not os.path.exists(todaydate+'.jpg'):
+        #     dfi.export(StockPrice, './resources/'+todaydate+'.jpg')
         return (200,todaydate,result)
     
 def render_mpl_table(data, col_width=3.0, row_height=0.625, font_size=14,

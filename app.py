@@ -19,11 +19,12 @@ token = f.readlines()
 token = token[0][:-1]
 notify = LineNotify(token)
 
-# @app.route("/")
-# def hello():
-#     return "Flask Test!"
+@app.route("/")
+def hello():
+    trade_transaction()
+    return "Flask Test!"
 
-@app.route("/", methods=['GET', 'POST'])
+@app.route("/test", methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
         if request.form.get('action1') == 'VALUE1':
@@ -48,7 +49,7 @@ class Config(object):
             'trigger': 'cron',                            # 指定任務觸發器 cron
             'day_of_week': 'mon-fri',              # 每週1至周5早上6點執行 
             'hour': 15,
-            'minute': 20   
+            'minute': 00   
             # 'trigger': 'interval',
             # 'seconds': 10
 
