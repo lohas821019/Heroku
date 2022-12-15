@@ -13,11 +13,12 @@ import time
 import dataframe_image as dfi
 import os
 import matplotlib.pyplot as plt
+import matplotlib
+# plt.rc("font",family='YouYuan')
 
-plt.rc("font",family='YouYuan')
-
-# plt.rcParams["font.sans-serif"] = ["SimHei"]  # 设置字体
-plt.rcParams["axes.unicode_minus"] = False  # 正常显示负号
+# # plt.rcParams["font.sans-serif"] = ["SimHei"]  # 设置字体
+# plt.rcParams["axes.unicode_minus"] = False  # 正常显示负号
+matplotlib.rcParams['font.family'] = ['Microsoft JhengHei']
 
 #pandas 結果對齊
 pd.set_option('display.unicode.ambiguous_as_wide', True)
