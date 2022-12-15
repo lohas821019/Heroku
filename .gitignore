@@ -1,5 +1,8 @@
 *.pyc
 .heroku_env/
-/vscode
+/.vscode
 *.png
-/venv
+/.venv
+.dockerignore
+render.yaml
+Dockerfile
