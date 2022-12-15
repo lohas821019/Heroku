@@ -19,7 +19,7 @@ token = f.readlines()
 token = token[0][:-1]
 notify = LineNotify(token)
 
-@app.route("/")
+@app.route("/v1")
 def hello():
     trade_transaction()
     return "Flask Test!"
