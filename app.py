@@ -48,7 +48,7 @@ class Config(object):
             'trigger': 'cron',                            # 指定任務觸發器 cron
             'day_of_week': 'mon-fri',              # 每週1至周5早上6點執行 
             'hour': 15,
-            'minute': 00   
+            'minute': 10   
             # 'trigger': 'interval',
             # 'seconds': 10
 
@@ -60,8 +60,9 @@ def trade_transaction():
     result = get_twse_trade()
     if result[0] == 200:
         notify.send(result[1] + "三大法人買賣金額統計表", image_path='./resources/'+result[1]+'.png')
-    return result[0]
-
+        return result[0]
+    else:
+        pass
 
 # notify.send( "文字測試")
 # notify.send("圖片測試", image_path='./test.jpg')
