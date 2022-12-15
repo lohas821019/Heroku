@@ -1,8 +1,13 @@
+# 更新做法:
+由於Heroku不再免費，因此使用 [render](https://render.com/) 搭配 [cron-job.org](https://console.cron-job.org/jobs)重新佈署，但由於render 無法使用cmd 調整自行問題 因此目前圖片中文無法顯示，並且須建立頁面，並由cron-job.org 設定定時任務([render不支援-Other Limitations ](https://render.com/docs/free))
+
+
 # 成果展示
 
 使用方式:創一個Line群組，把Line notify加入群組，讓他每日3點發通知 
 
 ![Demo](./resources/demo.JPG)
+
 
 # 環境設置
 
