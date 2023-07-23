@@ -2,7 +2,7 @@
 .heroku_env/
 /.vscode
 *.png
-/.venv
+/venv
 .dockerignore
 render.yaml
-Dockerfile
+Dockerfiles
