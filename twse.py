@@ -13,13 +13,16 @@ import time
 import dataframe_image as dfi
 import os
 import matplotlib.pyplot as plt
+import warnings
+
+warnings.filterwarnings('ignore', category=UserWarning)
 
 # plt.rc("font",family='YouYuan')
 
 # # plt.rcParams["font.sans-serif"] = ["SimHei"]  # 设置字体
 # plt.rcParams["axes.unicode_minus"] = False  # 正常显示负号
-plt.rcParams['font.family'] = ['Microsoft JhengHei']
-
+#plt.rcParams['font.family'] = ['Microsoft JhengHei']
+plt.rcParams['font.family'] = 'Arial' 
 #pandas 結果對齊
 pd.set_option('display.unicode.ambiguous_as_wide', True)
 pd.set_option('display.unicode.east_asian_width', True)
@@ -39,7 +42,9 @@ def get_twse_trade():
         date = zero + date
 
     todaydate = year+month+date
-    
+    print(todaydate)
+    print(type(todaydate))
+    todaydate = '20230720'
     headers = {
     'user-agent':"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36",
     "Accept-Language": "zh-TW,zh;q=0.9,en-US;q=0.8,en;q=0.7"
@@ -48,6 +53,7 @@ def get_twse_trade():
     url = 'https://www.twse.com.tw/fund/BFI82U?response=json&dayDate='+ todaydate
     data = requests.get(url).text
 
+    print(data)
     if data == '{"stat":"很抱歉，沒有符合條件的資料!"}':
         return 404
     else:
@@ -63,8 +69,8 @@ def get_twse_trade():
         fig,ax = render_mpl_table(StockPrice, header_columns=0, col_width=2.0)
         fig.savefig('./resources/'+todaydate +".png")
         
-        # if not os.path.exists(todaydate+'.jpg'):
-        #     dfi.export(StockPrice, './resources/'+todaydate+'.jpg')
+        if not os.path.exists(todaydate+'.jpg'):
+            dfi.export(StockPrice, './resources/'+todaydate+'.jpg')
         return (200,todaydate,result)
     
 def render_mpl_table(data, col_width=3.0, row_height=0.625, font_size=14,
@@ -103,6 +109,3 @@ def render_mpl_table(data, col_width=3.0, row_height=0.625, font_size=14,
     
 #     dom = etree.HTML(str(soup))
     
-
-
-
