@@ -1,73 +1,28 @@
 # -*- coding: utf-8 -*-
 """
 Created on Thu Jul 14 13:55:19 2022
-
-@author: Jason
 """
 
-from flask import Flask, redirect, url_for, request, render_template
-from twse import *
+from flask import Flask
+import schedule
+import time
+import threading
 from line_notify import LineNotify
-from flask_apscheduler import APScheduler
-
-app = Flask(__name__)  # 实例化，可视为固定格式
-app.debug = True  # Flask内置了调试模式，可以自动重载代码并显示调试信息
-app.config['JSON_AS_ASCII'] = False  # 解决flask接口中文数据编码问题
+from twse import get_twse_trade
+app = Flask(__name__)
+app.config['JSON_AS_ASCII'] = False
 
 f = open('token.txt', 'r')
-token = f.readlines()
-token = token[0][:-1]
+token = f.readline().strip()
 notify = LineNotify(token)
 
-@app.route("/v1")
+@app.route("/")
 def hello():
-    trade_transaction()
-    return "Flask Test!"
+    print("Hello")
+    notify.send("hello test")
+    return "hello test"
 
-@app.route("/test", methods=['GET', 'POST'])
-def index():
-    if request.method == 'POST':
-        if request.form.get('action1') == 'VALUE1':
-            trade_transaction()
-            return "Flask Test1!"
-        elif  request.form.get('action2') == 'VALUE2':
-            return "Flask Test2!"
-        else:
-            pass # unknown
-    elif request.method == 'GET':
-        return render_template('index.html', form=request.form)
-    
-    return render_template("index.html")
-
-
-class Config(object):
-    #JOBS = [
-        # {
-        #     'id': 'trade_transaction', # 一個標識
-        #     'func': '__main__:trade_transaction',     # 指定執行的函式 
-        #     # 'args': (1, 2),              # 傳入函式的引數
-        #     'trigger': 'cron',                            # 指定任務觸發器 cron
-        #     'day_of_week': 'mon-fri',              # 每週1至周5早上15點執行 
-        #     'hour': 15,
-        #     'minute': 00   
-        #     # 'trigger': 'interval',
-        #     # 'seconds': 10
-
-        # }
-    #]
-
-        ## for test
-    JOBS = [
-        {
-            'id': 'trade_transaction',       # A unique identifier for the job
-            'func': '__main__:trade_transaction',  # Specify the function to execute
-            'trigger': 'interval',           # Use 'interval' as the trigger
-            'seconds': 10,                   # Run the job every 30 seconds
-        }
-    ]
-    
-    SCHEDULER_API_ENABLED = True
-    
+@app.route("/v1")
 def trade_transaction():
     result = get_twse_trade()
     if result[0] == 200:
@@ -76,20 +31,21 @@ def trade_transaction():
     else:
         pass
 
-# notify.send( "文字測試")
-# notify.send("圖片測試", image_path='./test.jpg')
-# notify.send("貼紙測試",sticker_id=283, package_id=4)
-# notify.send("圖片&貼紙測試", image_path='./'+result[1]+'.png',sticker_id=283,package_id=4)
+def run_scheduler():
+    # Schedule the job to run on weekdays (Monday to Friday) at 15:00 (3:00 PM)
+    schedule.every().monday.at("15:00").do(hello)
+    schedule.every().tuesday.at("15:00").do(hello)
+    schedule.every().wednesday.at("15:00").do(hello)
+    schedule.every().thursday.at("15:00").do(hello)
+    schedule.every().friday.at("15:00").do(hello)
+    # schedule.every(10).seconds.do(trade_transaction)
+
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
 
 if __name__ == '__main__':
-    app = Flask(__name__,template_folder='templates')                 # 例項化flask
-    app.config.from_object(Config())      # 為例項化的 flask 引入配置 
-
-    scheduler = APScheduler()                  # 例項化 APScheduler
-    # it is also possible to enable the API directly
-    # scheduler.api_enabled = True
-    scheduler.init_app(app)                    # 把任務列表放入 flask
-    scheduler.start()                          # 啟動任務列表
-    app.debug = False
-    app.run(use_reloader=False)                # 啟動 flask
+    scheduler_thread = threading.Thread(target=run_scheduler)
+    scheduler_thread.start()
     
+    app.run(debug=False, use_reloader=False)

@@ -15,6 +15,9 @@ import os
 import matplotlib.pyplot as plt
 import warnings
 
+import matplotlib
+matplotlib.use('Agg')
+
 warnings.filterwarnings('ignore', category=UserWarning)
 # plt.rc("font",family='YouYuan')
 # # plt.rcParams["font.sans-serif"] = ["SimHei"]  # 设置字体
@@ -46,7 +49,7 @@ def get_twse_trade():
     todaydate = year+month+date
     print(todaydate)
     print(type(todaydate))
-    todaydate = '20230720'
+    # todaydate = '20230720'
     headers = {
     'user-agent':"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36",
     "Accept-Language": "zh-TW,zh;q=0.9,en-US;q=0.8,en;q=0.7"
@@ -85,8 +88,10 @@ def get_twse_trade():
         ax.axis('off')
 
         # Save the table chart as an image
-        plt.savefig("table_chart.png", bbox_inches='tight')
- 
+        plt.savefig("./resources/"+todaydate +".png")
+    
+        return (200,todaydate,StockPrice)
+    
 
         # result = StockPrice.to_numpy()
         
@@ -132,4 +137,3 @@ def render_mpl_table(data, col_width=3.0, row_height=0.625, font_size=14,
 #     # print(soup.prettify())  #輸出排版後的HTML內容
     
 #     dom = etree.HTML(str(soup))
-get_twse_trade()
