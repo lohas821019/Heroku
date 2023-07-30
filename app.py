@@ -90,6 +90,6 @@ if __name__ == '__main__':
     # scheduler.api_enabled = True
     scheduler.init_app(app)                    # 把任務列表放入 flask
     scheduler.start()                          # 啟動任務列表
-    app.debug = True
+    app.debug = False
     app.run(use_reloader=False)                # 啟動 flask
     

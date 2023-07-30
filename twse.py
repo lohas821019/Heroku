@@ -10,19 +10,21 @@ import numpy as np
 import json
 import requests
 import time
-import dataframe_image as dfi
+# import dataframe_image as dfi
 import os
 import matplotlib.pyplot as plt
 import warnings
 
 warnings.filterwarnings('ignore', category=UserWarning)
-
 # plt.rc("font",family='YouYuan')
-
 # # plt.rcParams["font.sans-serif"] = ["SimHei"]  # 设置字体
 # plt.rcParams["axes.unicode_minus"] = False  # 正常显示负号
 #plt.rcParams['font.family'] = ['Microsoft JhengHei']
-plt.rcParams['font.family'] = 'Arial' 
+# plt.rcParams['font.family'] = 'Arial' 
+# plt.rcParams['font.sans-serif'] = ['SimHei']
+plt.rcParams['font.sans-serif'] = ['SimHei', 'Microsoft YaHei',]
+
+
 #pandas 結果對齊
 pd.set_option('display.unicode.ambiguous_as_wide', True)
 pd.set_option('display.unicode.east_asian_width', True)
@@ -63,15 +65,37 @@ def get_twse_trade():
         StockPrice['買進金額'] = round(StockPrice['買進金額'].str.replace(',','').astype(float)/100000000,2)
         StockPrice['賣出金額'] = round(StockPrice['賣出金額'].str.replace(',','').astype(float)/100000000,2)
         StockPrice['買賣差額'] = round(StockPrice['買賣差額'].str.replace(',','').astype(float)/100000000,2)
+        StockPrice['單位名稱'] = StockPrice['單位名稱'].replace('外資及陸資(不含外資自營商)', '外資及陸資')
+        print(type(StockPrice))
+
+        # Create a table-like chart
+        fig, ax = plt.subplots()
+
+        # Convert DataFrame to list of lists
+        table_data = StockPrice.values.tolist()
+
+        # Create the table with cell colors (optional)
+        table = ax.table(cellText=table_data, colLabels=StockPrice.columns, cellLoc='center', loc='center', cellColours=None)
+
+        # Table style customization (optional)
+        table.auto_set_font_size(False)
+        table.set_fontsize(12)
+
+        # Remove axis ticks and labels
+        ax.axis('off')
+
+        # Save the table chart as an image
+        plt.savefig("table_chart.png", bbox_inches='tight')
+ 
+
+        # result = StockPrice.to_numpy()
         
-        result = StockPrice.to_numpy()
+        # fig,ax = render_mpl_table(StockPrice, header_columns=0, col_width=2.0)
+        # fig.savefig('./resources/'+todaydate +".png")
         
-        fig,ax = render_mpl_table(StockPrice, header_columns=0, col_width=2.0)
-        fig.savefig('./resources/'+todaydate +".png")
-        
-        if not os.path.exists(todaydate+'.jpg'):
-            dfi.export(StockPrice, './resources/'+todaydate+'.jpg')
-        return (200,todaydate,result)
+        # if not os.path.exists(todaydate+'.jpg'):
+        #     dfi.export(StockPrice, './resources/'+todaydate+'.jpg')
+        # return (200,todaydate,result)
     
 def render_mpl_table(data, col_width=3.0, row_height=0.625, font_size=14,
                      header_color='#40466e', row_colors=['#f1f1f2', 'w'], edge_color='w',
@@ -108,4 +132,4 @@ def render_mpl_table(data, col_width=3.0, row_height=0.625, font_size=14,
 #     # print(soup.prettify())  #輸出排版後的HTML內容
     
 #     dom = etree.HTML(str(soup))
-    
+get_twse_trade()
