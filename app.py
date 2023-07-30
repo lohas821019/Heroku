@@ -25,12 +25,15 @@ def hello():
 @app.route("/v1")
 def trade_transaction():
     result = get_twse_trade()
-    if result[0] == 200:
+
+    if result[0] == 404:
+        notify.send(result[1])
+        pass
+    elif result[0] == 200:
         notify.send(result[1] + "三大法人買賣金額統計表", image_path='./resources/'+result[1]+'.png')
         return result[0]
     else:
         pass
-
 def run_scheduler():
     # Schedule the job to run on weekdays (Monday to Friday) at 15:00 (3:00 PM)
     schedule.every().monday.at("15:00").do(hello)
@@ -42,7 +45,7 @@ def run_scheduler():
 
     while True:
         schedule.run_pending()
-        time.sleep(1)
+        time.sleep(3600)
 
 if __name__ == '__main__':
     scheduler_thread = threading.Thread(target=run_scheduler)

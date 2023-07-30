@@ -59,8 +59,8 @@ def get_twse_trade():
     data = requests.get(url).text
 
     print(data)
-    if data == '{"stat":"很抱歉，沒有符合條件的資料!"}':
-        return 404
+    if data == '{"stat":"很抱歉，沒有符合條件的資料!","hints":"單位：元"}':
+        return (404,data)
     else:
         json_data = json.loads(data)
         Stock_data = json_data['data']
