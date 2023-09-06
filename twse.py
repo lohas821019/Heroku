@@ -17,15 +17,15 @@ import warnings
 
 import matplotlib
 matplotlib.use('Agg')
-
 warnings.filterwarnings('ignore', category=UserWarning)
+
 # plt.rc("font",family='YouYuan')
-# # plt.rcParams["font.sans-serif"] = ["SimHei"]  # 设置字体
-# plt.rcParams["axes.unicode_minus"] = False  # 正常显示负号
+plt.rcParams["font.sans-serif"] = ["SimHei"]  # 设置字体
+plt.rcParams["axes.unicode_minus"] = False  # 正常显示负号
 #plt.rcParams['font.family'] = ['Microsoft JhengHei']
 # plt.rcParams['font.family'] = 'Arial' 
 # plt.rcParams['font.sans-serif'] = ['SimHei']
-plt.rcParams['font.sans-serif'] = ['SimHei', 'Microsoft YaHei',]
+#plt.rcParams['font.sans-serif'] = ['SimHei', 'Microsoft YaHei',]
 
 
 #pandas 結果對齊
@@ -59,6 +59,7 @@ def get_twse_trade():
     data = requests.get(url).text
 
     print(data)
+    
     if data == '{"stat":"很抱歉，沒有符合條件的資料!","hints":"單位：元"}':
         return (404,data)
     else:
@@ -101,7 +102,8 @@ def get_twse_trade():
         # if not os.path.exists(todaydate+'.jpg'):
         #     dfi.export(StockPrice, './resources/'+todaydate+'.jpg')
         # return (200,todaydate,result)
-    
+
+
 def render_mpl_table(data, col_width=3.0, row_height=0.625, font_size=14,
                      header_color='#40466e', row_colors=['#f1f1f2', 'w'], edge_color='w',
                      bbox=[0, 0, 1, 1], header_columns=0,

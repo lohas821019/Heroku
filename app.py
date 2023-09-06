@@ -4,11 +4,17 @@ Created on Thu Jul 14 13:55:19 2022
 """
 
 from flask import Flask
-import schedule
-import time
-import threading
 from line_notify import LineNotify
 from twse import get_twse_trade
+
+from apscheduler.schedulers.background import BackgroundScheduler
+from apscheduler.triggers.interval import IntervalTrigger
+
+scheduler = BackgroundScheduler()
+
+# 定义一个触发器，每隔10秒执行一次
+trigger = IntervalTrigger(seconds=10)
+
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False
 
@@ -16,13 +22,13 @@ f = open('token.txt', 'r')
 token = f.readline().strip()
 notify = LineNotify(token)
 
-@app.route("/")
+@app.route("/hello")
 def hello():
     print("Hello")
     notify.send("hello test")
     return "hello test"
 
-@app.route("/v1")
+@app.route("/")
 def trade_transaction():
     result = get_twse_trade()
 
@@ -34,21 +40,13 @@ def trade_transaction():
         return result[0]
     else:
         pass
-def run_scheduler():
-    # Schedule the job to run on weekdays (Monday to Friday) at 15:00 (3:00 PM)
-    schedule.every().monday.at("15:00").do(hello)
-    schedule.every().tuesday.at("15:00").do(hello)
-    schedule.every().wednesday.at("15:00").do(hello)
-    schedule.every().thursday.at("15:00").do(hello)
-    schedule.every().friday.at("15:00").do(hello)
-    # schedule.every(10).seconds.do(trade_transaction)
 
-    while True:
-        schedule.run_pending()
-        time.sleep(3600)
+# 添加定时任务
+scheduler.add_job(trade_transaction, trigger=trigger)
 
 if __name__ == '__main__':
-    scheduler_thread = threading.Thread(target=run_scheduler)
-    scheduler_thread.start()
-    
-    app.run(debug=False, use_reloader=False)
+    try:
+        scheduler.start()
+        app.run(debug=False, use_reloader=False)
+    finally:
+        scheduler.shutdown()
